@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 ft.addToBackStack(null);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                 ft.commit();
-                toolbar.setTitle("Profile");
-                toolbar.setTitleTextColor(Color.BLACK);
+               // toolbar.setTitle("Profile");
+               // toolbar.setTitleTextColor(Color.BLACK);
 
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -111,8 +111,8 @@ public class MainActivity extends AppCompatActivity {
                 ft.addToBackStack(null);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                 ft.commit();
-                toolbar.setTitle("Transaction History");
-                toolbar.setTitleTextColor(Color.BLACK);
+               // toolbar.setTitle("Transaction History");
+               // toolbar.setTitleTextColor(Color.BLACK);
 
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -131,8 +131,8 @@ public class MainActivity extends AppCompatActivity {
                 ft.addToBackStack(null);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                 ft.commit();
-                toolbar.setTitle("The Concept");
-                toolbar.setTitleTextColor(Color.BLACK);
+               // toolbar.setTitle("The Concept");
+                //toolbar.setTitleTextColor(Color.BLACK);
 
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -152,8 +152,8 @@ public class MainActivity extends AppCompatActivity {
                 ft.addToBackStack(null);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                 ft.commit();
-                toolbar.setTitle("Notification");
-                toolbar.setTitleTextColor(Color.BLACK);
+                //toolbar.setTitle("Notification");
+                //toolbar.setTitleTextColor(Color.BLACK);
 
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -173,8 +173,8 @@ public class MainActivity extends AppCompatActivity {
                 ft.addToBackStack(null);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                 ft.commit();
-                toolbar.setTitle("Rate The App");
-                toolbar.setTitleTextColor(Color.BLACK);
+               // toolbar.setTitle("Rate The App");
+                //toolbar.setTitleTextColor(Color.BLACK);
 
                 drawer.closeDrawer(GravityCompat.START);
 

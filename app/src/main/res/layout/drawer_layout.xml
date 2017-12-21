@@ -21,13 +21,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:orientation="vertical"
-                android:background="@drawable/backimage">
+                android:background="@drawable/hole">
 
                 <com.example.faizan.fuelapp.RoundedImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/google_plus"
+                    android:src="@drawable/boss"
                     android:layout_marginTop="30dp"
                     android:layout_marginStart="18dp"
                     android:layout_marginEnd="18dp"

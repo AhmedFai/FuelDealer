@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:textColor="#000000"
-            android:hint="Email address"
+            android:hint="Phone Number"
             android:ems="10"
             android:background="@drawable/auth_inputs"
             android:drawablePadding="12dp"
@@ -114,20 +114,44 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp">
+            android:weightSum="2"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="80dp"
-                android:background="@drawable/facebook"/>
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/google_plus"
-                android:layout_marginStart="50dp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:gravity="end"
+                android:layout_marginEnd="18dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/facebook" />
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="start"
+                android:gravity="start"
+                android:layout_marginStart="18dp">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/google_plus"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

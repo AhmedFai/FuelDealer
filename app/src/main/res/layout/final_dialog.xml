@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minWidth="300dp"
+    android:background="#ffffff"
     android:orientation="vertical">
 
 
@@ -50,12 +51,13 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:text="4.91"
             android:textColor="#000"
-            android:background="#ffcd2e"
+            android:background="@drawable/coloredcircle"
             android:rotation="-30"
+            android:gravity="center"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
             android:layout_alignParentEnd="true"

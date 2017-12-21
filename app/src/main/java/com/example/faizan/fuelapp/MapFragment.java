@@ -103,7 +103,7 @@ public class MapFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if (Objects.equals(bookBtn.getText().toString(), "Confirm"))
+                if (Objects.equals(bookBtn.getText().toString(), "Confirm Order"))
                 {
 
                     cnfrmCard.setVisibility(View.VISIBLE);
@@ -115,7 +115,7 @@ public class MapFragment extends Fragment {
                 {
                     cnfrmCard.setVisibility(View.GONE);
                     searchbar.setVisibility(View.VISIBLE);
-                    bookBtn.setText("Confirm");
+                    bookBtn.setText("Confirm Order");
                 }
 
             }

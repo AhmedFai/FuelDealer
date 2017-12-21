@@ -136,7 +136,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:background="#c2c2c2">
+            android:background="#f3f3f3">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:textColor="#000"
-                android:text="200 "/>
+                android:text="RS. 221 "/>
 
 
             <TextView
