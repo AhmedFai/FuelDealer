@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">FuelApp</string>
+
+    <string name="class_prompt">Choose a Class</string>
+    <string-array name="ltr_class">
+        <item>1 Ltr</item>
+        <item>2 Ltr</item>
+        <item>3 Ltr</item>
+        <item>4 Ltr</item>
+        <item>5 Ltr</item>
+        <item>6 Ltr</item>
+        <item>7 Ltr</item>
+    </string-array>
+
+
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+
+
+    <string name="google_maps_api_key">AIzaSyAXf02-5xB9x-UYRq107n4kLP1wN6fmbd4</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
