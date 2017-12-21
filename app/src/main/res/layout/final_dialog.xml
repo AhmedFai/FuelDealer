@@ -51,8 +51,8 @@
 
 
         <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:text="4.91"
             android:textColor="#000"
             android:background="@drawable/coloredcircle"
@@ -69,16 +69,22 @@
 
         <TextView
             android:id="@+id/searchBar1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawablePadding="10dp"
-            android:text="XXXXXXXXXXXXX"
-            android:layout_marginStart="5dp"
+            android:text="Your Location"
             android:drawableLeft="@drawable/circlebtn"
             android:background="#ffffff"
-            android:textSize="18dp"
-            android:layout_marginBottom="30dp"
-            android:gravity="center" />
+            android:gravity="center_vertical"
+            android:layout_marginStart="30dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="XXXXXXXXXXX XXXXX"
+            android:layout_marginStart="55dp"
+            android:textColor="#000"
+            android:layout_marginBottom="20dp"/>
 
 
 
@@ -92,7 +98,7 @@
             android:layout_marginTop="20dp"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#ffffff"
             android:text="Filling Confirm"
@@ -100,13 +106,12 @@
             android:gravity="center"
             android:textSize="20sp"
             android:layout_gravity="center"
-            android:layout_marginStart="10dp"
             android:textColor="#000000" />
 
 
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#ffffff"
             android:text="₹ 250.65"
@@ -114,7 +119,6 @@
             android:gravity="center"
             android:textSize="20sp"
             android:layout_gravity="center"
-            android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
             android:textColor="#000000" />
 

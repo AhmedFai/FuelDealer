@@ -46,6 +46,11 @@
                         android:text="Cash On Delivery"
                         />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#c2c2c2"/>
+
                 <RadioButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
