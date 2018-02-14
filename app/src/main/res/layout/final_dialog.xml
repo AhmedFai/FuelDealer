@@ -54,7 +54,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:text="4.91"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:background="@drawable/coloredcircle"
             android:rotation="-30"
             android:gravity="center"

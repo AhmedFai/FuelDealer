@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FuelApp</string>
+    <string name="app_name">Deliver Fuel</string>
 
     <string name="class_prompt">Choose a Class</string>
     <string-array name="ltr_class">
@@ -16,6 +16,8 @@
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
 
+    <string name="facebook_app_id">585263188485701</string>
+    <string name="fb_login_protocol_scheme">fb585263188485701</string>
 
     <string name="google_maps_api_key">AIzaSyAXf02-5xB9x-UYRq107n4kLP1wN6fmbd4</string>
     <!-- TODO: Remove or change this placeholder text -->

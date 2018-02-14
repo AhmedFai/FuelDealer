@@ -18,10 +18,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,6 +33,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.List;
@@ -45,10 +49,11 @@ public class MapFragment extends Fragment {
     private SupportMapFragment mSupportMapFragment;
     private Spinner spinner;
     RelativeLayout searchbar;
-    Button bookBtn;
+    LinearLayout bookButtons;
+    Button bookBtn, bookNow, bookLater, booklater;
     CardView cnfrmCard;
     TextView cancel, calldriver;
-
+    String time1;
 
 
     @Override
@@ -61,7 +66,7 @@ public class MapFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_map,container,false);
+        View view = inflater.inflate(R.layout.fragment_map, container, false);
 
         spinner = (Spinner) view.findViewById(R.id.spinner);
         searchbar = (RelativeLayout) view.findViewById(R.id.searchBar);
@@ -69,6 +74,11 @@ public class MapFragment extends Fragment {
         cnfrmCard = (CardView) view.findViewById(R.id.cnfrmCard);
         cancel = (TextView) view.findViewById(R.id.cancel);
         calldriver = (TextView) view.findViewById(R.id.callDriver);
+        bookNow = (Button) view.findViewById(R.id.booknow);
+        bookLater = (Button) view.findViewById(R.id.booklater);
+        bookButtons = (LinearLayout) view.findViewById(R.id.bookbtns);
+        booklater = (Button) view.findViewById(R.id.booklater);
+
 
         calldriver.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,28 +105,133 @@ public class MapFragment extends Fragment {
                     }
                 });
 
+
             }
         });
 
+
+        bookNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                bookButtons.setVisibility(View.GONE);
+                searchbar.setVisibility(View.VISIBLE);
+
+            }
+        });
 
         bookBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (Objects.equals(bookBtn.getText().toString(), "Confirm Order"))
-                {
+                searchbar.setVisibility(View.GONE);
+                cnfrmCard.setVisibility(View.VISIBLE);
+            }
+        });
 
-                    cnfrmCard.setVisibility(View.VISIBLE);
-                    searchbar.setVisibility(View.GONE);
-                    bookBtn.setVisibility(View.GONE);
+        booklater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.setContentView(R.layout.later_dialog);
+                dialog.setCancelable(true);
+                dialog.show();
 
-                }
-                else
-                {
-                    cnfrmCard.setVisibility(View.GONE);
-                    searchbar.setVisibility(View.VISIBLE);
-                    bookBtn.setText("Confirm Order");
-                }
+                final TextView date = dialog.findViewById(R.id.date);
+                date.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final Dialog dateDialog = new Dialog(getActivity());
+                        dateDialog.setContentView(R.layout.date_dialog);
+                        dateDialog.setCancelable(true);
+                        dateDialog.show();
+
+
+                        final DatePicker picker = (DatePicker) dateDialog.findViewById(R.id.picker);
+                        TextView dateok = dateDialog.findViewById(R.id.dateOk);
+                        TextView datecnl = dateDialog.findViewById(R.id.cancelDate);
+
+                        dateok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                String day = String.valueOf(picker.getDayOfMonth());
+                                String month = String.valueOf(picker.getMonth() + 1);
+                                String year = String.valueOf(picker.getYear());
+
+                                final String date1 = year + "-" + month + "-" + day;
+
+                                date.setText(date1);
+
+                                dateDialog.dismiss();
+
+                            }
+                        });
+
+
+                        datecnl.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dateDialog.dismiss();
+                            }
+                        });
+                    }
+                });
+
+
+                final TextView time = dialog.findViewById(R.id.time);
+                time.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final Dialog timeDialog = new Dialog(getActivity());
+                        timeDialog.setContentView(R.layout.time_dialog);
+                        timeDialog.setCancelable(true);
+                        timeDialog.show();
+
+
+                        final TimePicker picker = (TimePicker) timeDialog.findViewById(R.id.timepicker);
+                        TextView timeok = timeDialog.findViewById(R.id.timeOk);
+                        TextView timecnl = timeDialog.findViewById(R.id.timeCancel);
+
+                        timeok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                String hour = String.valueOf(picker.getCurrentHour());
+                                String minute = String.valueOf(picker.getCurrentMinute());
+
+                                time1 = hour + " : " + minute;
+
+                                time.setText(hour + " : " + minute);
+
+
+                                timeDialog.dismiss();
+
+                            }
+                        });
+
+                        timecnl.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                timeDialog.dismiss();
+                            }
+                        });
+                    }
+                });
+
+
+                Button okButton = (Button) dialog.findViewById(R.id.laterOk);
+
+                okButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        searchbar.setVisibility(View.VISIBLE);
+                        bookButtons.setVisibility(View.GONE);
+                        dialog.dismiss();
+                    }
+                });
+
 
             }
         });
@@ -157,9 +272,9 @@ public class MapFragment extends Fragment {
 
                         LatLng myLocation = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
                         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
-                        try{
-                            List<Address> listAdresses = geocoder.getFromLocation(Double.parseDouble(lat), Double.parseDouble(lon),1);
-                            if(null != listAdresses && listAdresses.size() > 0 ){
+                        try {
+                            List<Address> listAdresses = geocoder.getFromLocation(Double.parseDouble(lat), Double.parseDouble(lon), 1);
+                            if (null != listAdresses && listAdresses.size() > 0) {
                                 String address = listAdresses.get(0).getAddressLine(0);
                                 String state = listAdresses.get(0).getAdminArea();
                                 String country = listAdresses.get(0).getCountryName();
@@ -167,9 +282,9 @@ public class MapFragment extends Fragment {
 
                                 googleMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(Double.parseDouble(lat), Double.parseDouble(lon)))
-                                        .title(""+subLocality+", "+ state+", "+ country +""));
+                                        .title("" + subLocality + ", " + state + ", " + country + ""));
                             }
-                        } catch (IOException e){
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
 
@@ -179,7 +294,6 @@ public class MapFragment extends Fragment {
                         googleMap.moveCamera(cameraUpdate);
 
 
-
                     }
 
                 }
@@ -187,13 +301,10 @@ public class MapFragment extends Fragment {
             });
 
 
-
         }
 
         return view;
     }
-
-
 
 
 }

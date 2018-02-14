@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:id="@+id/cnfrmCard"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp"
     android:layout_marginTop="10dp"
-    app:cardElevation="2dp"
-    app:cardCornerRadius="5dp">
+    app:cardCornerRadius="5dp"
+    app:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,36 +16,33 @@
         android:orientation="vertical">
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="3"
+            android:orientation="horizontal"
             android:padding="10dp"
-            android:orientation="horizontal">
+            android:weightSum="3">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:padding="10dp"
-                android:orientation="vertical">
-
-
+                android:orientation="vertical"
+                android:padding="10dp">
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DL 1R TB 5437"/>
+                    android:text="DL 1R TB 5437" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="start"
                     android:layout_marginTop="20dp"
+                    android:gravity="start"
                     android:text="OTP : 2410"
-                    android:textColor="#000"/>
+                    android:textColor="#000" />
 
 
             </LinearLayout>
@@ -54,38 +50,38 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#c2c2c2"/>
+                android:background="#c2c2c2" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:padding="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="James Smith"
-                    android:textColor="#000"/>
+                    android:textColor="#000" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="3.7"
-                    android:drawableRight="@drawable/star"
                     android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/staricon"
                     android:gravity="center_vertical"
-                    android:textColor="#000"/>
+                    android:text="3.7"
+                    android:textColor="#000" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#c2c2c2"/>
+                android:background="#c2c2c2" />
 
 
             <LinearLayout
@@ -93,34 +89,33 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:paddingTop="10dp"
+                android:orientation="vertical"
                 android:paddingLeft="5dp"
-                android:orientation="vertical">
-
+                android:paddingTop="10dp">
 
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Call Driver"
                     android:id="@+id/callDriver"
-                    android:textColor="#000"
-                    android:drawableLeft="@drawable/phoneicon"
-                    android:gravity="center_vertical"
-                    android:drawablePadding="5dp"
-                    android:layout_gravity="center_vertical"/>
-
-                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cancel Order"
-                    android:id="@+id/cancel"
-                    android:textColor="#000"
-                    android:drawableLeft="@drawable/cancelicon"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:drawableLeft="@drawable/phoneicon"
                     android:drawablePadding="5dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:gravity="center_vertical"
+                    android:text="Call Driver"
+                    android:textColor="#000" />
+
+                <TextView
+                    android:id="@+id/cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="20dp"
+                    android:drawableLeft="@drawable/cancelicon"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text="Cancel Order"
+                    android:textColor="#000" />
 
 
             </LinearLayout>
@@ -130,36 +125,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:padding="10dp"
             android:layout_alignParentStart="true"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
+            android:background="#f3f3f3"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:background="#f3f3f3">
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:gravity="start"
-                android:text="Cash to be paid : "/>
+                android:text="Cash to be paid : " />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:textColor="#000"
-                android:text="RS. 221 "/>
+                android:text="RS. 221 "
+                android:textColor="#000" />
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="end"
                 android:layout_marginEnd="10dp"
+                android:gravity="end"
                 android:text="20 Ltr Petrol"
-                android:textColor="#ea382e"/>
+                android:textColor="#ea382e" />
         </LinearLayout>
 
 

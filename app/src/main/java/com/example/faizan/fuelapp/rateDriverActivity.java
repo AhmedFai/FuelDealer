@@ -21,6 +21,7 @@ public class rateDriverActivity extends AppCompatActivity {
         rateToolbar.setNavigationIcon(R.drawable.arrow);
 
         submit = (Button)findViewById(R.id.submitRating);
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -6,10 +6,10 @@
 
 
     <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/mapFragment"
-        android:name="com.google.android.gms.maps.SupportMapFragment">
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     </fragment>
 
@@ -18,82 +18,130 @@
         android:layout_height="match_parent"
         android:paddingBottom="20dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/searchBar"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
-        android:visibility="gone"
-        android:orientation="vertical">
-
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/searchBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:visibility="visible">
-        <include android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            layout="@layout/searchbar"/>
-        </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="110dp">
-
-            <include
-                android:layout_height="match_parent"
-                layout="@layout/fueltypecard"
-                android:layout_width="match_parent" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="60dp">
-
-        <include android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            layout="@layout/quantitycard"/>
-        </LinearLayout>
-
-    </RelativeLayout>
-
-
-
-        <include android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            layout="@layout/cnfrmridecard"
-            android:visibility="gone"
-            android:layout_alignParentBottom="true"
             android:layout_marginLeft="18dp"
             android:layout_marginRight="18dp"
-            android:layout_marginBottom="10dp"/>
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:visibility="visible">
+
+                    <include
+                        layout="@layout/searchbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
 
 
-    <Button
-        android:id="@+id/bookbtnFirst"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/auth_button"
-        android:text="Book"
-        android:textColor="#fff"
-        android:textAllCaps="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="110dp">
+
+                <include
+                    layout="@layout/fueltypecard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="60dp">
+
+                <include
+                    layout="@layout/quantitycard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/bookbtnFirst"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/auth_button"
+                android:text="Confirm Order"
+                android:textAllCaps="true"
+                android:textColor="#fff" />
+
+        </RelativeLayout>
+
+
+        <include
+            layout="@layout/cnfrmridecard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:visibility="gone" />
+
+
+
+
+        <LinearLayout
+            android:id="@+id/bookbtns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:weightSum="2"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/booknow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="18dp"
+                    android:background="@drawable/auth_button"
+                    android:text="Book Now"
+                    android:textAllCaps="true"
+                    android:textColor="#fff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/booklater"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="18dp"
+                    android:background="@drawable/auth_button"
+                    android:text="Book Letter"
+                    android:textAllCaps="true"
+                    android:textColor="#fff" />
+            </LinearLayout>
+
+
+        </LinearLayout>
 
     </RelativeLayout>
 </RelativeLayout>

@@ -3,6 +3,7 @@ package com.example.faizan.fuelapp;
 import android.Manifest;
 import android.app.Notification;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
@@ -43,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     DrawerLayout drawer;
     TextView profile, history, concept, notification, ratetheapp, logout;
+    SharedPreferences pref;
+    SharedPreferences.Editor edit;
+
 
 
     @Override
@@ -60,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setTitleTextColor(Color.WHITE);
+        pref = getSharedPreferences("pref", MODE_PRIVATE);
+        edit = pref.edit();
 
 
         drawer = (DrawerLayout) findViewById(R.id.activity_main);
@@ -185,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.remove("userId");
                 Intent i = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(i);
                 finish();

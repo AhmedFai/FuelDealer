@@ -1,13 +1,100 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context="com.example.faizan.fuelapp.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Profile Fragment" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/headerBarImage"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/backimage"
+        android:scaleType="centerCrop" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/headerBarImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-60dp"
+        android:src="@drawable/pictures"
+        android:scaleType="centerCrop"
+        android:elevation="5dp"
+        android:padding="20dp"
+        app:civ_border_color="#f1f1f1"
+        app:civ_border_width="2dp"/>
+
+    <LinearLayout
+        android:id="@+id/infoText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/profileImage">
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User Name"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:id="@+id/contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="011-9777447843"
+            android:gravity="center"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="user@gmail.com"
+            android:gravity="center"
+            android:textColor="#000000"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/cardview"
+            android:layout_marginEnd="10dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textColor="#000000"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/locationdrop"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:gravity="center_vertical"
+                android:drawablePadding="10dp"
+                android:text="New Friends Colony,New Delhi"
+                android:textColor="#000000"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

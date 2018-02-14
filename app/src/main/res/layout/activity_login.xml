@@ -10,9 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp">
+        android:layout_marginRight="25dp"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/logoIcon"
@@ -22,68 +22,67 @@
             android:layout_marginBottom="20dp"
             android:layout_marginTop="20dp"
             android:padding="16dp" />
-        <EditText
-            android:id="@+id/loginEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:textColor="#000000"
-            android:hint="Phone Number"
-            android:ems="10"
-            android:background="@drawable/auth_inputs"
-            android:drawablePadding="12dp"
-            android:padding="10dp"
-            android:textColorHint="#c2c2c2"
-            android:maxLines="1"
-            android:layout_marginTop="15dp"
-            />
 
         <EditText
-            android:id="@+id/logInPass"
+            android:id="@+id/phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:textColor="#000000"
-            android:ems="10"
-            android:drawablePadding="12dp"
-            android:padding="10dp"
-            android:hint="Password"
-            android:textColorHint="#c2c2c2"
-            android:maxLines="1"
+            android:layout_marginTop="15dp"
             android:background="@drawable/auth_inputs"
-            android:layout_marginTop="4dp" />
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:textColorHint="#c2c2c2" />
+
+        <EditText
+            android:id="@+id/pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/auth_inputs"
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:textColorHint="#c2c2c2" />
 
         <TextView
             android:id="@+id/forgotPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="FORGOT PASSWORD ?"
             android:textColor="#ea382e"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"/>
-
+            android:textStyle="bold" />
 
 
         <Button
             android:id="@+id/logInButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/auth_button"
-            android:text="Log in"
-            android:textColor="#fff"
-            android:textStyle="bold"
-            android:textSize="17sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
+            android:background="@drawable/auth_button"
+            android:clickable="true"
+            android:text="Log in"
             android:textAllCaps="false"
-            android:clickable="true"/>
+            android:textColor="#fff"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <View
@@ -95,17 +94,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="OR"
                 android:layout_marginStart="10dp"
-                android:textSize="18sp"
                 android:gravity="center"
-                android:textColor="#000"/>
+                android:text="OR"
+                android:textColor="#000"
+                android:textSize="18sp" />
 
             <View
                 android:layout_width="100dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
                 android:background="#c2c2c2" />
 
 
@@ -114,21 +113,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
+            android:orientation="horizontal"
+            android:weightSum="2">
 
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:gravity="end"
                 android:layout_marginEnd="18dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="end">
 
                 <ImageView
+                    android:id="@+id/facebook"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/facebook" />
@@ -137,19 +136,19 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="start"
-                android:gravity="start"
-                android:layout_marginStart="18dp">
+                android:layout_marginStart="18dp"
+                android:layout_weight="1"
+                android:gravity="start">
 
                 <ImageView
+                    android:id="@+id/google"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/google_plus"/>
+                    android:src="@drawable/google_plus" />
 
             </LinearLayout>
 
@@ -165,22 +164,29 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:alpha="0.7"
                 android:text="Don't have an account ?"
-                android:textColor="#ea382e"
-                android:alpha="0.7"/>
+                android:textColor="#ea382e" />
+
             <TextView
                 android:id="@+id/regBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Register"
                 android:layout_marginStart="5dp"
-                android:textStyle="bold"
+                android:text="Register"
                 android:textColor="#ea382e"
-                />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
 
 </RelativeLayout>
