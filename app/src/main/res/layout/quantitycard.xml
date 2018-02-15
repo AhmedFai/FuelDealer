@@ -34,7 +34,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:spinnerMode="dropdown"
-                android:entries="@array/ltr_class"
                 android:prompt="@string/class_prompt"/>
 
         </LinearLayout>

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,6 +28,14 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 
 import org.json.JSONObject;
 
@@ -40,7 +49,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     Button loginButton;
     EditText phone, pass, forgetNumber, resetCode, setPass, cnPass;
@@ -50,6 +59,11 @@ public class LoginActivity extends AppCompatActivity {
     ImageView facebook, google;
     CallbackManager mCallbackManager;
     TextView registertBtn, forgotcancel, forgotconfirm, resetcancel, resetconfirm, forgotpassword;
+    GoogleApiClient googleApiClient ;
+    int RC_SIGN_IN = 12;
+    Boolean goog_flag = false;
+    Boolean fb_flag = false;
+    Boolean sign_flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             final Bean b = (Bean) getApplicationContext();
                             bar.setVisibility(View.VISIBLE);
+                            fb_flag = true;
 
 
                             final Retrofit retrofit = new Retrofit.Builder()
@@ -89,6 +104,42 @@ public class LoginActivity extends AppCompatActivity {
                                     .addConverterFactory(GsonConverterFactory.create())
                                     .build();
                             final Allapi cr = retrofit.create(Allapi.class);
+                            Call<LoginBean> call = cr.social(name,email,pid);
+                            call.enqueue(new Callback<LoginBean>() {
+                                @Override
+                                public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
+                                    if (Objects.equals(response.body().getStatus(), "1")){
+                                        Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                                        Bean b = (Bean) getApplicationContext();
+                                        b.userId = response.body().getData().getUserId();
+                                        b.name = response.body().getData().getName();
+                                        b.phone = response.body().getData().getPhone();
+                                        b.email = response.body().getData().getEmail();
+
+                                        edit.putString("userId", response.body().getData().getUserId());
+                                        edit.putString("Type", "facebook");
+                                        edit.apply();
+
+                                        Intent s = new Intent(LoginActivity.this, MainActivity.class);
+                                        s.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(s);
+                                        finish();
+                                        bar.setVisibility(View.GONE);
+                                    }else {
+                                        Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                        bar.setVisibility(View.GONE);
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<LoginBean> call, Throwable t) {
+
+                                    LoginManager.getInstance().logOut();
+                                    bar.setVisibility(View.GONE);
+                                    fb_flag = false;
+                                }
+                            });
 
 
                         } catch (Exception e) {
@@ -128,10 +179,27 @@ public class LoginActivity extends AppCompatActivity {
         facebook = (ImageView) findViewById(R.id.facebook);
         google = (ImageView) findViewById(R.id.google);
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
         facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile"));
+            }
+        });
+
+
+        google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signIn();
             }
         });
 
@@ -305,6 +373,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                         bar.setVisibility(View.VISIBLE);
+                        sign_flag = true;
                         final Bean b = (Bean) getApplicationContext();
                         Retrofit retrofit = new Retrofit.Builder()
                                 .baseUrl(b.baseURL)
@@ -320,8 +389,10 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                     bar.setVisibility(View.GONE);
                                     b.phone = response.body().getData().getPhone();
+                                    b.userId = response.body().getData().getUserId();
 
                                     edit.putString("userId", response.body().getData().getPhone());
+                                    edit.putString("Type", "signIn");
                                     edit.apply();
 
                                     Intent l = new Intent(LoginActivity.this, MainActivity.class);
@@ -337,6 +408,8 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(Call<LoginBean> call, Throwable t) {
 
+                                bar.setVisibility(View.GONE);
+                                sign_flag = false;
                             }
                         });
 
@@ -355,15 +428,106 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+
+    private void signIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
 
-       /* if (requestCode == RC_SIGN_IN) {
+        if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
-        }*/
+        }
+
+    }
+
+    private  void  handleSignInResult(GoogleSignInResult result){
+
+
+        Log.d("handle karo bhai", result.toString());
+
+
+        if (result.isSuccess()){
+            GoogleSignInAccount acct = result.getSignInAccount();
+
+
+            final String email = acct.getEmail();
+            final String pid = acct.getId();
+            final String name = acct.getDisplayName();
+
+            Log.d("gmailId", acct.getEmail());
+            Log.d("gpid", acct.getId());
+
+
+            bar.setVisibility(View.VISIBLE);
+            goog_flag = true;
+            final Bean b = (Bean)getApplicationContext();
+
+            final Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(b.baseURL)
+                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            final Allapi cr = retrofit.create(Allapi.class);
+            Call<LoginBean> call = cr.social(name,email,pid);
+            call.enqueue(new Callback<LoginBean>() {
+                @Override
+                public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
+                    if (Objects.equals(response.body().getStatus(), "1")){
+                        Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        final Bean b = (Bean)getApplicationContext();
+
+
+                        b.userId = response.body().getData().getUserId();
+                        Intent gi = new Intent(LoginActivity.this, MainActivity.class);
+
+                        edit.putString("userId", response.body().getData().getUserId());
+                        Log.d("gooogllleee","succeeesss");
+                        edit.putString("Type", "google");
+                        edit.apply();
+                        startActivity(gi);
+                        finish();
+
+
+                        bar.setVisibility(View.GONE);
+                    }else {
+                        Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        bar.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<LoginBean> call, Throwable t) {
+
+                    Log.d("Google mai dikkt hai", t.toString());
+                    bar.setVisibility(View.GONE);
+                    signOut();
+                    goog_flag = false;
+                }
+            });
+        }
+    }
+
+
+    private void signOut() {
+        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(@NonNull Status status) {
+
+
+                    }
+                });
+    }
+
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 }

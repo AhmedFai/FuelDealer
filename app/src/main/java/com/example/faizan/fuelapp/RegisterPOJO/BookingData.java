@@ -7,24 +7,23 @@ import com.google.gson.annotations.SerializedName;
  * Created by faizan on 2/14/2018.
  */
 
-public class RegisterBean {
-
-    @SerializedName("message")
+public class BookingData {
+    @SerializedName("bookingId")
     @Expose
-    private String message;
+    private String bookingId;
     @SerializedName("status")
     @Expose
     private String status;
-    @SerializedName("data")
+    @SerializedName("statusCode")
     @Expose
-    private Data data;
+    private String statusCode;
 
-    public String getMessage() {
-        return message;
+    public String getBookingId() {
+        return bookingId;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setBookingId(String bookingId) {
+        this.bookingId = bookingId;
     }
 
     public String getStatus() {
@@ -35,12 +34,11 @@ public class RegisterBean {
         this.status = status;
     }
 
-    public Data getData() {
-        return data;
+    public String getStatusCode() {
+        return statusCode;
     }
 
-    public void setData(Data data) {
-        this.data = data;
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
     }
-
 }

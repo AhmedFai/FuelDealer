@@ -1,7 +1,9 @@
 package com.example.faizan.fuelapp;
 
 
+import com.example.faizan.fuelapp.EstimatePricePOJO.EstimatePriceBean;
 import com.example.faizan.fuelapp.ForgetPasswordPOJO.ForgetPasswordBean;
+import com.example.faizan.fuelapp.FuelTypePOJO.FuelTypeBean;
 import com.example.faizan.fuelapp.LoginPOJO.LoginBean;
 import com.example.faizan.fuelapp.OtpPOJO.OtpBean;
 import com.example.faizan.fuelapp.RegisterPOJO.RegisterBean;
@@ -57,5 +59,33 @@ public interface Allapi {
             @Part("newPassword") String o
 
     );
+
+    @Multipart
+    @POST("fuel/api/socialsign_up.php")
+    Call<LoginBean> social(
+            @Part("username") String m,
+            @Part("email") String n,
+            @Part("pid") String o
+
+    );
+
+
+    @Multipart
+    @POST("fuel/api/fuel-type-list.php")
+    Call<FuelTypeBean> type(
+            @Part("userId") String m
+
+
+    );
+
+    @Multipart
+    @POST("fuel/api/estimatePrice.php")
+    Call<EstimatePriceBean> price(
+            @Part("quantity") String m,
+            @Part("userId") String n,
+            @Part("fuelTypeId") String o
+
+    );
+
 
 }

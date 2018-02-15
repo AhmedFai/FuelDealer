@@ -1,13 +1,14 @@
-package com.example.faizan.fuelapp.RegisterPOJO;
+package com.example.faizan.fuelapp.EstimatePricePOJO;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by faizan on 2/14/2018.
+ * Created by faizan on 2/15/2018.
  */
 
-public class RegisterBean {
+public class EstimatePriceBean {
+
 
     @SerializedName("message")
     @Expose
@@ -42,5 +43,6 @@ public class RegisterBean {
     public void setData(Data data) {
         this.data = data;
     }
+
 
 }

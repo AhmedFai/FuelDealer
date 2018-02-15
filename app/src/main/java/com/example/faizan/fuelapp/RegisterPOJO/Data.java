@@ -26,12 +26,15 @@ public class Data {
     @SerializedName("image")
     @Expose
     private String image;
-    @SerializedName("rideStatus")
+    @SerializedName("password")
     @Expose
-    private String rideStatus;
-    @SerializedName("rideData")
+    private String password;
+    @SerializedName("isBooking")
     @Expose
-    private RideData rideData;
+    private String isBooking;
+    @SerializedName("bookingData")
+    @Expose
+    private BookingData bookingData;
 
     public String getUserId() {
         return userId;
@@ -81,19 +84,28 @@ public class Data {
         this.image = image;
     }
 
-    public String getRideStatus() {
-        return rideStatus;
+    public String getPassword() {
+        return password;
     }
 
-    public void setRideStatus(String rideStatus) {
-        this.rideStatus = rideStatus;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public RideData getRideData() {
-        return rideData;
+    public String getIsBooking() {
+        return isBooking;
     }
 
-    public void setRideData(RideData rideData) {
-        this.rideData = rideData;
+    public void setIsBooking(String isBooking) {
+        this.isBooking = isBooking;
     }
+
+    public BookingData getBookingData() {
+        return bookingData;
+    }
+
+    public void setBookingData(BookingData bookingData) {
+        this.bookingData = bookingData;
+    }
+
 }

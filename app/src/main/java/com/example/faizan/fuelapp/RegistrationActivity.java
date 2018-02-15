@@ -1,5 +1,6 @@
 package com.example.faizan.fuelapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.faizan.fuelapp.RegisterPOJO.RegisterBean;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.w3c.dom.Text;
 
@@ -36,6 +38,7 @@ public class RegistrationActivity extends AppCompatActivity {
     SharedPreferences pref;
     SharedPreferences.Editor edit;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,9 @@ public class RegistrationActivity extends AppCompatActivity {
         pass = (EditText) findViewById(R.id.regPass);
         cpass = (EditText) findViewById(R.id.cnfrmPass);
         register = (Button) findViewById(R.id.regButton);
+
+        pref = getSharedPreferences("pref", Context.MODE_PRIVATE);
+        edit = pref.edit();
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +92,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                                 .addConverterFactory(GsonConverterFactory.create())
                                                 .build();
                                         Allapi cr = retrofit.create(Allapi.class);
-                                        Call<RegisterBean> call = cr.register(n,p,e,ps);
+                                        Call<RegisterBean> call = cr.register(n,e,ps,p);
                                         call.enqueue(new Callback<RegisterBean>() {
                                             @Override
                                             public void onResponse(Call<RegisterBean> call, Response<RegisterBean> response) {
@@ -96,6 +102,8 @@ public class RegistrationActivity extends AppCompatActivity {
                                                     bar.setVisibility(View.GONE);
                                                     b.userId = response.body().getData().getUserId();
                                                     b.otp = response.body().getData().getOtp();
+                                                    edit.putString("userId", response.body().getData().getPhone());
+                                                    edit.apply();
 
                                                     Intent in = new Intent(RegistrationActivity.this, OtpActivity.class );
                                                     in.putExtra("OTP", response.body().getData().getOtp());

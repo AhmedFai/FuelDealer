@@ -1,13 +1,15 @@
-package com.example.faizan.fuelapp.RegisterPOJO;
+package com.example.faizan.fuelapp.FuelTypePOJO;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
- * Created by faizan on 2/14/2018.
+ * Created by faizan on 2/15/2018.
  */
 
-public class RegisterBean {
+public class FuelTypeBean {
 
     @SerializedName("message")
     @Expose
@@ -17,7 +19,7 @@ public class RegisterBean {
     private String status;
     @SerializedName("data")
     @Expose
-    private Data data;
+    private List<Datum> data = null;
 
     public String getMessage() {
         return message;
@@ -35,11 +37,11 @@ public class RegisterBean {
         this.status = status;
     }
 
-    public Data getData() {
+    public List<Datum> getData() {
         return data;
     }
 
-    public void setData(Data data) {
+    public void setData(List<Datum> data) {
         this.data = data;
     }
 

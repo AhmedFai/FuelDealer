@@ -1,6 +1,7 @@
 package com.example.faizan.fuelapp;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -17,6 +19,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +27,13 @@ import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -37,15 +47,17 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import github.nisrulz.easydeviceinfo.base.EasyLocationMod;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     Toolbar toolbar;
     DrawerLayout drawer;
     TextView profile, history, concept, notification, ratetheapp, logout;
     SharedPreferences pref;
     SharedPreferences.Editor edit;
+    GoogleApiClient googleApiClient;
 
 
 
@@ -66,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.WHITE);
         pref = getSharedPreferences("pref", MODE_PRIVATE);
         edit = pref.edit();
+
+        buildGoogleApiClient();
 
 
         drawer = (DrawerLayout) findViewById(R.id.activity_main);
@@ -191,14 +205,100 @@ public class MainActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edit.remove("userId");
-                Intent i = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(i);
-                finish();
+                String ty = pref.getString("Type" , "");
+
+                Log.d("asdas" , ty);
+
+                if (Objects.equals(pref.getString("Type", ""), "google")) {
+                    Log.d("htyhyh" , "jkbkb");
+
+                    if (googleApiClient.isConnected()) {
+                        signOut();
+                    }
+                } else if (Objects.equals(pref.getString("Type", ""), "facebook")) {
+
+                    LoginManager.getInstance().logOut();
+                    edit.remove("userId");
+                    edit.remove("facebook");
+                    edit.apply();
+                    Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                    // overridePendingTransition(0,0);
+                    finish();
+
+                } else {
+                    if (Objects.equals(pref.getString("Type", ""), "signIn")) {
+                        edit.remove("phone");
+                        edit.remove("userId");
+                       /* edit.remove("name");
+                        edit.remove("email");*/
+                        edit.apply();
+                        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
+                        finish();
+                    }
+                }
             }
         });
 
     }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        googleApiClient.connect();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (googleApiClient.isConnected()) {
+            googleApiClient.disconnect();
+        }
+    }
+
+    private void signOut() {
+        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @SuppressLint("CommitPrefEdits")
+                    @Override
+                    public void onResult(@NonNull Status status) {
+
+
+                        if (status.isSuccess()) {
+
+                            edit.remove("userId");
+                            edit.remove("google");
+                            edit.apply();
+                            Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(i);
+                            // overridePendingTransition(0,0);
+                            finish();
+
+                        }
+
+
+                    }
+                });
+    }
+
+    private synchronized void buildGoogleApiClient() {
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -241,6 +341,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 }
